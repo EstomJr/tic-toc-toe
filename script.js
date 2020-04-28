@@ -16,21 +16,70 @@ console.log(boxes)
 for (let i = 0; i < boxes.length; i++) {
     // quando clicar
     boxes[i].addEventListener("click", function() {
-        console.log("entrou")
 
-        let el;
+        //variavel para definir qual player vai jogar, x or o 
+        let el = CheckPlay(player1, player2);
 
-        if (player1 == player2) {
-            //x
-            el = x;
-        } else {
-            //0
-            el = o;
+        // verifica se ja tem x ou o
+        if (this.childNodes.length == 0) {
+
+            //adcionar o elemente aos boxes
+            let cloneEl = el.cloneNode(true);
+            //inserindo o elemento
+            this.appendChild(cloneEl);
+
+            //computador jogada
+            if (player1 == player2) {
+                player1++;
+            } else {
+                player2++;
+            }
+
+            //checar vitoria
+            checkWin();
+
         }
-
-        let cloneEl = el.cloneNode(true);
-
-        this.appendChild(cloneEl);
-
     });
+}
+
+//chegar quem é o jogador da rodada
+function CheckPlay(player1, player2) {
+    if (player1 == player2) {
+        //x
+        el = x;
+    } else {
+        //0
+        el = o;
+    }
+
+    return el;
+}
+
+function checkWin() {
+
+    let b1 = document.getElementById('block-1');
+    let b2 = document.getElementById('block-2');
+    let b3 = document.getElementById('block-3');
+    let b4 = document.getElementById('block-4');
+    let b5 = document.getElementById('block-5');
+    let b6 = document.getElementById('block-6');
+    let b7 = document.getElementById('block-7');
+    let b8 = document.getElementById('block-8');
+    let b9 = document.getElementById('block-9');
+
+    //horinzontal 
+    //
+    if (b1.childNodes.length > 0 && b2.childNodes > 0 && b3.childNodes.length > 0) {
+
+        let b1child = b1.childNodes[0].className;
+        let b2child = b2.childNodes[0].className;
+        let b3child = b3.childNodes[0].className;
+
+        if (b1child == 'x' && b2child == 'x' && b3child == 'x') {
+            console.log('X venceu')
+
+        } else if (b1child == 'o' && b2child == 'o' && b3child == 'o') {
+            console.log('O venceu')
+        }
+    }
 }
