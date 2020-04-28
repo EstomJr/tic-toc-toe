@@ -1,1 +1,1 @@
-# tic-toc-toe
+# tic-toc-toe game in javascript
